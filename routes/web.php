@@ -1,30 +1,16 @@
 <?php
 
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\LoginUserController;
+use App\Http\Controllers\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
-use Pest\Plugins\Only;
 
 Route::view('/','home');
 Route::resource('jobs', JobController::class);
 Route::view('/contact','contact');
 
+Route::get('/register', [RegisteredUserController::class, 'create']);
+Route::post('/register', [RegisteredUserController::class, 'store']);
 
-
-
-// Route::controller(JobController::class)->group(function(){
-//     Route::get('/jobs', 'index');
-//     Route::get('/jobs/create', 'create');
-//     Route::get('/jobs/{job}', 'show');
-//     Route::post('/jobs', 'store');
-//     Route::get('/jobs/{job}/edit', 'edit');
-//     Route::patch('/jobs/{job}', 'update');
-//     Route::delete('/jobs/{job}', 'destroy');
-// });
-
-// Route::resource('jobs', JobController::class, [
-//   'only'=>['create','destroy']
-// ]);
-
-// Route::resource('jobs', JobController::class, [
-//     'except'=>['destroy']
-//   ]);
+Route::get('/login', [LoginUserController::class, 'create']);
+Route::post('/login', [LoginUserController::class, 'store']);
